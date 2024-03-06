@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "tsc": "tsc -p tsconfig.json --noEmit",
+    "verify": "npm run lint && npm run tsc"
   },
   "dependencies": {
     "@types/node": "20.11.25",
