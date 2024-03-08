@@ -27,7 +27,7 @@ const NavBar = () => {
             className={classnames({
               'text-zinc-900': currentPath === link.href,
               'text-gray-500': currentPath !== link.href,
-              'hover:text-zinc-800 transition-colors border-b border-gray': true,
+              'hover:text-zinc-800 transition-colors': true,
             })}
             href={link.href}
           >
