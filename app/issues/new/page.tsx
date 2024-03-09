@@ -65,7 +65,6 @@ const NewIssuePage = () => {
             <SimpleMDE placeholder="Description" {...field} />
           )}
         />
-
         <ErrorMessage error={errors.description?.message} />
 
         <Button disabled={isSumbitting}>
