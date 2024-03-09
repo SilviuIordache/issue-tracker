@@ -7,8 +7,7 @@ export async function POST(request: NextRequest) {
 
   const validation = createIssueSchema.safeParse(body);
 
-  if (!validation.sucess) {
-    // console.log(validation);
+  if (!validation.success) {
     return NextResponse.json(validation.error.format(), { status: 400 });
   }
 
