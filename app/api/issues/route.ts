@@ -3,8 +3,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 
 const createIssueSchema = z.object({
-  title: z.string().min(1).max(255),
-  description: z.string().min(1),
+  title: z.string().min(1, 'Title required').max(255),
+  description: z.string().min(1, 'Description required'),
 });
 
 export async function POST(request: NextRequest) {
@@ -13,8 +13,8 @@ export async function POST(request: NextRequest) {
   const validation = createIssueSchema.safeParse(body);
 
   if (!validation.sucess) {
-    console.log(validation);
-    // return NextResponse.json(validation.error.errors, { status: 400 });
+    // console.log(validation);
+    return NextResponse.json(validation.error.format(), { status: 400 });
   }
 
   const newIssue = await prisma.issue.create({
