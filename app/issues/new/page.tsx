@@ -29,7 +29,8 @@ const NewIssuePage = () => {
   const [isSumbitting, setIsSubmittng] = useState(false);
 
   const router = useRouter();
-  const onSubmit = async (data) => {
+
+  const onSubmit = handleSubmit(async (data) => {
     try {
       setIsSubmittng(true);
 
@@ -42,7 +43,7 @@ const NewIssuePage = () => {
     } finally {
       setIsSubmittng(false);
     }
-  };
+  });
 
   return (
     <div className="max-w-xl">
@@ -51,7 +52,7 @@ const NewIssuePage = () => {
           <Callout.Text>{error}</Callout.Text>
         </Callout.Root>
       )}
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
+      <form onSubmit={onSubmit} className="space-y-3">
         <TextField.Root>
           <TextField.Input placeholder="Title" {...register('title')} />
         </TextField.Root>
