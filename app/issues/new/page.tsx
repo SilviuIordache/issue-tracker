@@ -38,7 +38,6 @@ const NewIssuePage = () => {
     try {
       setIsSubmittng(true);
 
-      console.log(data);
       await axios.post('/api/issues', data);
       router.push('/issues');
     } catch (error) {
