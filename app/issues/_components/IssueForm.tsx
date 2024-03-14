@@ -39,7 +39,11 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
     try {
       setIsSubmittng(true);
 
-      await axios.post('/api/issues', data);
+      if (issue) {
+        await axios.patch(`/api/issues/${issue.id}`, data);
+      } else {
+        await axios.post('/api/issues', data);
+      }
       router.push('/issues');
     } catch (error) {
       console.log(error);
@@ -78,8 +82,8 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
         <ErrorMessage error={errors.description?.message} />
 
         <Button disabled={isSumbitting}>
+          {issue ? 'Update issue' : 'Submit New Issue'}{' '}
           {isSumbitting && <Spinner />}
-          Submit New Issue
         </Button>
       </form>
     </div>
