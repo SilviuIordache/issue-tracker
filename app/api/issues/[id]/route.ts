@@ -1,6 +1,6 @@
 import { issueSchema } from '@/app/validationSchemas';
 import prisma from '@/prisma/client';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
 export async function PATCH(
   request: NextRequest,
@@ -21,7 +21,7 @@ export async function PATCH(
   });
 
   if (!issue) {
-    return NextResponse.error('Issue not found', { status: 404 });
+    return NextResponse.json('Issue not found', { status: 404 });
   }
 
   const updatedIssue = await prisma.issue.update({
