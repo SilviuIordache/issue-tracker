@@ -3,7 +3,7 @@ import './theme-config.css';
 import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import NavBar from './NavBar';
+import NavBar from './components/NavBar';
 import { Container, Theme, ThemePanel } from '@radix-ui/themes';
 import AuthProvider from './auth/Provider';
 
