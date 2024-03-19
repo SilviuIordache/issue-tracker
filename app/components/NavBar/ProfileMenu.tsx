@@ -16,7 +16,7 @@ const ProfileMenu = () => {
       <DropdownMenu.Root>
         <DropdownMenu.Trigger>
           <Avatar
-            src={session.user.image!}
+            src={session!.user.image!}
             fallback="?"
             size="2"
             radius="full"
@@ -25,7 +25,7 @@ const ProfileMenu = () => {
         </DropdownMenu.Trigger>
         <DropdownMenu.Content>
           <DropdownMenu.Label>
-            <Text size="2">{session.user.email!}</Text>
+            <Text size="2">{session!.user.email!}</Text>
           </DropdownMenu.Label>
           <DropdownMenu.Item>
             <Link href="/api/auth/signout" className="nav-link">
