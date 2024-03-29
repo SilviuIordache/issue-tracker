@@ -1,7 +1,7 @@
 'use client';
 import { Status } from '@prisma/client';
 import { Select } from '@radix-ui/themes';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import React from 'react';
 
 const statuses: { label: string; value?: Status }[] = [
@@ -12,16 +12,37 @@ const statuses: { label: string; value?: Status }[] = [
 ];
 
 const IssueStatusFilter = () => {
+  const searchParams = useSearchParams();
   const router = useRouter();
 
   const handleFilterChange = (status: Status | '') => {
-    const query = status ? `?status=${status}` : '';
+    const params = new URLSearchParams(searchParams.toString());
+
+    // Set or replace the status parameter
+    if (status) {
+      params.set('status', status);
+    } else {
+      // If status is empty and you want to remove it from the query
+      params.delete('status');
+    }
+
+    // Ensure 'orderBy' is preserved if it exists, without appending it again
+    const orderBy = searchParams.get('orderBy');
+    if (orderBy) {
+      params.set('orderBy', orderBy);
+    }
+
+    // Construct the query string
+    const query = params.toString() ? `?${params.toString()}` : '';
 
     router.push(`/issues${query}`);
   };
 
   return (
-    <Select.Root onValueChange={handleFilterChange}>
+    <Select.Root
+      defaultValue={searchParams.get('status') || '  '}
+      onValueChange={handleFilterChange}
+    >
       <Select.Trigger>
         <Select.Label>Fitler by status... </Select.Label>
       </Select.Trigger>
