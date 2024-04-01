@@ -1,9 +1,8 @@
-import { DoubleArrowLeftIcon } from '@radix-ui/react-icons';
-import { Pagination } from './components';
-import { Button, Flex } from '@radix-ui/themes';
+import { Flex } from '@radix-ui/themes';
 import LatestIssues from './LatestIssues';
 import IssueSummary from './IssueSummary';
 import prisma from '@/prisma/client';
+import IssueChart from './IssueChart';
 
 export default async function Home({
   searchParams,
@@ -18,7 +17,8 @@ export default async function Home({
 
   return (
     <Flex>
-      <IssueSummary open={open} closed={inProgress} inProgress={closed} />
+      <IssueChart open={open} closed={inProgress} inProgress={closed} />
+      {/* <IssueSummary open={open} closed={inProgress} inProgress={closed} /> */}
       {/* <LatestIssues /> */}
     </Flex>
   );
