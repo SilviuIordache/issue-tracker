@@ -1,0 +1,55 @@
+import prisma from '@/prisma/client';
+import { Issue } from '@prisma/client';
+import { Avatar, Card, Flex, Heading, Table } from '@radix-ui/themes';
+import React from 'react';
+import { IssueStatusBadge } from './components';
+import Link from 'next/link';
+
+const LatestIssues = async () => {
+  const issues: Issue[] = await prisma.issue.findMany({
+    orderBy: {
+      createdAt: 'asc',
+    },
+    take: 5,
+    include: {
+      assignedToUser: true,
+    },
+  });
+
+  console.log(issues);
+
+  return (
+    <Card>
+      <Heading size="4" mb={'5'}>
+        Latest Issues
+      </Heading>
+      <Table.Root>
+        <Table.Body>
+          {issues.map((issue: Issue) => (
+            <Table.Row key={issue.id}>
+              <Table.Cell>
+                <Flex justify={'between'}>
+                  <Flex direction={'column'} align={'start'} gap={'2'}>
+                    <Link href={`/issues/${issue.id}`}>{issue.title}</Link>
+                    <IssueStatusBadge status={issue.status} />
+                  </Flex>
+
+                  {issue.assignedToUser && (
+                    <Avatar
+                      src={issue.assignedToUser.image!}
+                      fallback="?"
+                      radius={'full'}
+                      size={'2'}
+                    />
+                  )}
+                </Flex>
+              </Table.Cell>
+            </Table.Row>
+          ))}
+        </Table.Body>
+      </Table.Root>
+    </Card>
+  );
+};
+
+export default LatestIssues;

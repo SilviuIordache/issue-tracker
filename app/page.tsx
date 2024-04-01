@@ -1,6 +1,7 @@
 import { DoubleArrowLeftIcon } from '@radix-ui/react-icons';
 import { Pagination } from './components';
 import { Button } from '@radix-ui/themes';
+import LatestIssues from './LatestIssues';
 
 export default function Home({
   searchParams,
@@ -9,12 +10,7 @@ export default function Home({
 }) {
   return (
     <>
-      <Pagination
-        itemCount={100}
-        pageSize={10}
-        currentPage={parseInt(searchParams.page)}
-      />
-      <div>Hello World</div>
+      <LatestIssues/>
     </>
   );
 }
