@@ -18,21 +18,17 @@ const IssueStatusFilter = () => {
   const handleFilterChange = (status: Status | '') => {
     const params = new URLSearchParams(searchParams.toString());
 
-    // Set or replace the status parameter
     if (status) {
       params.set('status', status);
     } else {
-      // If status is empty and you want to remove it from the query
       params.delete('status');
     }
 
-    // Ensure 'orderBy' is preserved if it exists, without appending it again
     const orderBy = searchParams.get('orderBy');
     if (orderBy) {
       params.set('orderBy', orderBy);
     }
 
-    // Construct the query string
     const query = params.toString() ? `?${params.toString()}` : '';
 
     router.push(`/issues${query}`);
@@ -40,7 +36,7 @@ const IssueStatusFilter = () => {
 
   return (
     <Select.Root
-      defaultValue={searchParams.get('status') || '  '}
+      defaultValue={searchParams.get('status') || ''}
       onValueChange={handleFilterChange}
     >
       <Select.Trigger>
