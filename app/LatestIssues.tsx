@@ -16,7 +16,6 @@ const LatestIssues = async () => {
     },
   });
 
-  console.log(issues);
 
   return (
     <Card>

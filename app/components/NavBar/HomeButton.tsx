@@ -8,7 +8,6 @@ const HomeButton = () => {
     <Link href="/">
       <Flex align={'center'} gap={'2'}>
         <AiFillBug />
-        <Text>Home</Text>
       </Flex>
     </Link>
   );

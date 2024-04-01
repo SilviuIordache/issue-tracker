@@ -11,7 +11,6 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  console.log('got here');
   const body = await request.json();
 
   const validation = issueSchema.safeParse(body);
